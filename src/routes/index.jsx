@@ -1,9 +1,10 @@
-import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { HeaderBackButton, createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
+
 
 import Contacts from '../views/Contacts';
-
+import NewContact from '../views/NewContact';
+import Contact from '../views/Contact';
 
 export default createAppContainer(createStackNavigator({
   Boards: {
@@ -11,13 +12,25 @@ export default createAppContainer(createStackNavigator({
     navigationOptions: {
       title: 'Contacts',
     }
+  },
+  Contact: {
+    screen: Contact,
+    navigationOptions: {
+      title: 'Contact',
+    }
+  },
+  NewContact: {
+    screen: NewContact,
+    navigationOptions: {
+      title: 'New Contact',
+    }
   }
 },
 {
   /* The header config from HomeScreen is now here */
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#2e2c2e'
+      backgroundColor: '#fff'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
