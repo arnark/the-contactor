@@ -2,6 +2,13 @@ import * as FileSystem from 'expo-file-system';
 const contactsDirectory = `${FileSystem.documentDirectory}contacts`;
 
 
+function getNewContactId() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 async function createContactsDirectory() {
   const dir = await FileSystem.getInfoAsync(contactsDirectory);
   if (!dir.exists) {
@@ -17,7 +24,7 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   const fileUri = `${contactsDirectory}/${contactName}.json`
 
   const contact = JSON.stringify({
-    contactId: Math.floor(Math.random() * 1000) + 1,
+    contactId: getNewContactId(),
     contactName,
     contactPhoneNumber,
     contactPhoto
