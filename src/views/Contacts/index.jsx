@@ -1,56 +1,48 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, View, Button, Alert } from 'react-native';
+import ContactList from '../../components/ContactList';
 import * as contactService from '../../services/contactService';
+//import * as data from '../../services/dataImporter';
 
 
 export default class Contacts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0 };
-    this.t = setInterval(() => {
-      this.setState({ count: this.state.count + 1 });
-    }, 1000);
+    this.state = {
+      contacts: [],
+      loadingContacts: false
+    };
   }
 
-  componentDidMount() {
-    const { navigation } = this.props;
-
-    this.focusListener = navigation.addListener('didFocus', () => {
-      this.setState({ count: 0 });
-    });
-
-    const getAllContacts = async () => {
-      const allContacts = await contactService.getAllContacts();
-      alert(allContacts);
-    }
-
-    const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
-      const createContact =
-        await contactService.createNewContact(contactName, contactPhoneNumber, contactPhoto);
-      alert(JSON.stringify(createContact));
-    }
-
-    createNewContact('testname', 'asdf', 'sd')
-    createNewContact('testname2', 'asdf', 'sd')
-    createNewContact('testname3', 'asdf', 'sd')
-
-    getAllContacts()
-
+  async componentDidMount() {
+    await this.fetchContacts();
 }
 
   componentWillUnmount() {
-    this.focusListener.remove();
-    clearTimeout(this.t);
+  }
+
+  handleOnPress = async () => {
+    contactService.createNewContact((Math.floor(Math.random() * 1000) + 1).toString(), 'test3', 'sadf');
+    await this.fetchContacts();
+  }
+
+  async fetchContacts() {
+    this.setState({ loadingContacts: true });
+    const contacts = await contactService.getAllContacts();
+    this.setState({ loadingContacts: false, contacts });
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
-      <>
-        <TouchableOpacity>
-          <Text>Create new shit</Text>
-        </TouchableOpacity>
-      </>
+      <View>
+        <ContactList
+          contacts={this.state.contacts}
+          navigation={this.props.navigation}
+        />
+
+        <Button onPress={this.handleOnPress} title="Create new sstufff" />
+
+      </View>
     );
   }
 }
