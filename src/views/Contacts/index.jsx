@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import * as contactService from '../../services/contactService';
 
 
 export default class Contacts extends React.Component {
@@ -17,6 +18,24 @@ export default class Contacts extends React.Component {
     this.focusListener = navigation.addListener('didFocus', () => {
       this.setState({ count: 0 });
     });
+
+    const getAllContacts = async () => {
+      const allContacts = await contactService.getAllContacts();
+      alert(allContacts);
+    }
+
+    const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
+      const createContact =
+        await contactService.createNewContact(contactName, contactPhoneNumber, contactPhoto);
+      alert(JSON.stringify(createContact));
+    }
+
+    createNewContact('testname', 'asdf', 'sd')
+    createNewContact('testname2', 'asdf', 'sd')
+    createNewContact('testname3', 'asdf', 'sd')
+
+    getAllContacts()
+
 }
 
   componentWillUnmount() {
@@ -28,7 +47,9 @@ export default class Contacts extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <>
-        <Text>test</Text>
+        <TouchableOpacity>
+          <Text>Create new shit</Text>
+        </TouchableOpacity>
       </>
     );
   }
