@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, Button, Alert } from 'react-native';
 import ContactList from '../../components/ContactList';
 import * as contactService from '../../services/contactService';
-//import * as data from '../../services/dataImporter';
 
 
 export default class Contacts extends React.Component {

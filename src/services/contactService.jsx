@@ -23,8 +23,6 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
     contactPhoto
   });
 
-  console.log(contact);
-
   try {
     // Check if contacts directory exists, create new if it doesn't
     await createContactsDirectory();
