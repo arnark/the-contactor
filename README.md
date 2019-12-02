@@ -1,3 +1,3 @@
-# Toddler-app
+# the-contactor
 
-Project #1 - App Development 2019
+Project #2 - App Development 2019
