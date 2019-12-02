@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Button, Alert } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import ContactList from '../../components/ContactList';
+import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
-
+import styles from './styles';
 
 export default class Contacts extends React.Component {
   constructor(props) {
@@ -33,15 +34,19 @@ export default class Contacts extends React.Component {
 
   render() {
     return (
-      <View>
-        <ContactList
-          contacts={this.state.contacts}
-          navigation={this.props.navigation}
-        />
-
-        <Button onPress={this.handleOnPress} title="Create new sstufff" />
-
-      </View>
+      <>
+        <View style={styles.container}>
+          <ContactList
+            contacts={this.state.contacts}
+            navigation={this.props.navigation}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={this.handleOnPress}
+        >
+          <NewContactButton />
+        </TouchableOpacity>
+      </>
     );
   }
 }
