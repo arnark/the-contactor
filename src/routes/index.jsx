@@ -32,7 +32,7 @@ export default createAppContainer(createStackNavigator({
     headerStyle: {
       backgroundColor: '#fff'
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
       textAlign: 'center',
