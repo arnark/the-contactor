@@ -9,6 +9,12 @@ function getNewContactId() {
   });
 }
 
+function sortContactsByName(contactsArray) {
+  contactsArray.sort((a, b) => {
+    return a.contactName.localeCompare(b.contactName);
+  })
+}
+
 async function createContactsDirectory() {
   const dir = await FileSystem.getInfoAsync(contactsDirectory);
   if (!dir.exists) {
@@ -66,6 +72,7 @@ export const getAllContacts = async () => {
     console.log(e);
   }
 
+  sortContactsByName(allContacts);
   return Promise.all(allContacts.map(async (contact) => {
     return {
       contactId: contact.contactId,
