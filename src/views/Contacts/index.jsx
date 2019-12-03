@@ -10,8 +10,7 @@ export default class Contacts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contacts: [],
-      loadingContacts: false
+      contacts: []
     };
   }
 
@@ -20,9 +19,8 @@ export default class Contacts extends React.Component {
   }
 
   async fetchContacts() {
-    this.setState({ loadingContacts: true });
     const contacts = await contactService.getAllContacts();
-    this.setState({ loadingContacts: false, contacts });
+    this.setState({ contacts });
   }
 
   render() {
