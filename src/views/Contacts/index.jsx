@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, TextInput } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
@@ -29,26 +30,40 @@ export default class Contacts extends React.Component {
     this.setState({ contacts });
   }
 
-  render() {
-    return (
-      <>
-        <View style={styles.container}>
-          <TextInput
-            value={this.state.name}
-            onChangeText={(text) => this.searchForContacts(text)}
-            style={globalStyles.inputField}
-          />
-          <ContactList
-            contacts={this.state.contacts}
-            navigation={this.props.navigation}
-          />
-        </View>
-        <TouchableOpacity
-          onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
-        >
-          <NewContactButton />
-        </TouchableOpacity>
-      </>
-    );
+
+  updateSearch = text => {
+      this.setState({ searchStr : text });
+      this.searchForContacts(text) ;
+    }
+
+
+
+    render() {
+      return (
+        <>
+          <View style={styles.container}>
+          <SearchBar
+            placeholder="Search.."
+            onChangeText={(text) => this.updateSearch(text)}
+            value={this.state.searchStr}/>
+
+            <TextInput
+              value={this.state.name}
+              onChangeText={(text) => this.searchForContacts(text)}
+              style={globalStyles.inputField}
+            />
+
+            <ContactList
+              contacts={this.state.contacts}
+              navigation={this.props.navigation}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
+          >
+            <NewContactButton />
+          </TouchableOpacity>
+        </>
+      );
+    }
   }
-}
