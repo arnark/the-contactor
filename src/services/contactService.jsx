@@ -26,31 +26,6 @@ export const cleanDirectory = async () => {
   await FileSystem.deleteAsync(contactsDirectory);
 }
 
-export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
-  const fileUri = `${contactsDirectory}/${contactName}.json`
-
-  const contact = JSON.stringify({
-    contactId: getNewContactId(),
-    contactName,
-    contactPhoneNumber,
-    contactPhoto
-  });
-
-  try {
-    // Check if contacts directory exists, create new if it doesn't
-    await createContactsDirectory();
-
-    // Create the new contact
-    await FileSystem.writeAsStringAsync(fileUri, contact, {
-      encoding: FileSystem.EncodingType.UTF8
-    });
-
-    return { status: true };
-  } catch (e) {
-    return { status: false };
-  }
-}
-
 export const getAllContacts = async () => {
   // Check if contacts directory exists, create new if it doesn't
   await createContactsDirectory();
@@ -81,4 +56,30 @@ export const getAllContacts = async () => {
       contactPhoto: contact.contactPhoto
     };
   }));
+}
+
+export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
+  const contactId = getNewContactId();
+  // Using contactId as file name instead of contactName, in case of duplicate names
+  const fileUri = `${contactsDirectory}/${contactId}.json`
+  const contact = JSON.stringify({
+    contactId,
+    contactName,
+    contactPhoneNumber,
+    contactPhoto
+  });
+
+  try {
+    // Check if contacts directory exists, create new if it doesn't
+    await createContactsDirectory();
+
+    // Create the new contact
+    await FileSystem.writeAsStringAsync(fileUri, contact, {
+      encoding: FileSystem.EncodingType.UTF8
+    });
+
+    return { status: true };
+  } catch (e) {
+    return { status: false, message: 'Failed to create contact. Please try again.' };
+  }
 }

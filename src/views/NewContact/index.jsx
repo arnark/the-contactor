@@ -1,13 +1,15 @@
 import React from 'react';
 import { Text } from 'react-native';
-
+import NewContactInput from '../../components/NewContactInput';
 
 export default class Contacts extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
       <>
-        <Text>test</Text>
+        <NewContactInput
+          navigation={this.props.navigation}
+        />
       </>
     );
   }

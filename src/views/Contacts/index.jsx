@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import ContactList from '../../components/ContactList';
 import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
 import styles from './styles';
+
 
 export default class Contacts extends React.Component {
   constructor(props) {
@@ -15,14 +16,6 @@ export default class Contacts extends React.Component {
   }
 
   async componentDidMount() {
-    await this.fetchContacts();
-}
-
-  componentWillUnmount() {
-  }
-
-  handleOnPress = async () => {
-    contactService.createNewContact((Math.floor(Math.random() * 1000) + 1).toString(), 'test3', 'sadf');
     await this.fetchContacts();
   }
 
@@ -42,7 +35,7 @@ export default class Contacts extends React.Component {
           />
         </View>
         <TouchableOpacity
-          onPress={this.handleOnPress}
+          onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
         >
           <NewContactButton />
         </TouchableOpacity>
