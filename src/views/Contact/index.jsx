@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
+import ContactDetail from '../../components/ContactDetail';
 
 
 export default class Contacts extends React.Component {
@@ -7,8 +8,9 @@ export default class Contacts extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <>
-        <Text></Text>
-        <Text>test</Text>
+      <ContactDetail
+        navigation={this.props.navigation}
+      />
       </>
     );
   }

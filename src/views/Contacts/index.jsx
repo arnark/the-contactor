@@ -38,7 +38,6 @@ export default class Contacts extends React.Component {
             onChangeText={(text) => this.searchForContacts(text)}
             style={globalStyles.inputField}
           />
-
           <ContactList
             contacts={this.state.contacts}
             navigation={this.props.navigation}

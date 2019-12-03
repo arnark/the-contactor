@@ -5,8 +5,9 @@ import styles from './styles';
 
 const ContactRow = ({ contactId, contactName, contactPhoto, navigation }) => (
   <TouchableHighlight
-    onPress={() => { navigation.navigate('Contact', { contactId }); }}
+    onPress={() => { navigation.navigate('Contact', { contactId, contactName, contactPhoto }); }}
     style={styles.rowContainer}
+    navigation={navigation}
   >
     <>
       <Text>{contactName}</Text>
