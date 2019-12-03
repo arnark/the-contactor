@@ -1,47 +1,55 @@
 import React from 'react';
-import { Text, View, Button, Alert } from 'react-native';
+import { View, TouchableOpacity, TextInput } from 'react-native';
 import ContactList from '../../components/ContactList';
+import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
+import styles from './styles';
+import globalStyles from '../../styles/styles';
 
 
 export default class Contacts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contacts: [],
-      loadingContacts: false
+      contacts: []
     };
   }
 
   async componentDidMount() {
     await this.fetchContacts();
-}
-
-  componentWillUnmount() {
-  }
-
-  handleOnPress = async () => {
-    contactService.createNewContact((Math.floor(Math.random() * 1000) + 1).toString(), 'test3', 'sadf');
-    await this.fetchContacts();
   }
 
   async fetchContacts() {
-    this.setState({ loadingContacts: true });
     const contacts = await contactService.getAllContacts();
-    this.setState({ loadingContacts: false, contacts });
+    this.setState({ contacts });
+  }
+
+  async searchForContacts(str) {
+    const contacts = await contactService.searchForContacts(str);
+    this.setState({ contacts });
   }
 
   render() {
     return (
-      <View>
-        <ContactList
-          contacts={this.state.contacts}
-          navigation={this.props.navigation}
-        />
+      <>
+        <View style={styles.container}>
+          <TextInput
+            value={this.state.name}
+            onChangeText={(text) => this.searchForContacts(text)}
+            style={globalStyles.inputField}
+          />
 
-        <Button onPress={this.handleOnPress} title="Create new sstufff" />
-
-      </View>
+          <ContactList
+            contacts={this.state.contacts}
+            navigation={this.props.navigation}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
+        >
+          <NewContactButton />
+        </TouchableOpacity>
+      </>
     );
   }
 }

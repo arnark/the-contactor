@@ -7,6 +7,7 @@ export default class Contacts extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <>
+        <Text></Text>
         <Text>test</Text>
       </>
     );
