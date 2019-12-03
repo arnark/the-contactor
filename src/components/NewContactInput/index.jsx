@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  View, TextInput, Text, TouchableHighlight, KeyboardAvoidingView, Alert
+  View, TextInput, Text, TouchableHighlight, KeyboardAvoidingView, Alert, Button
 } from 'react-native';
 import { Formik } from 'formik';
+import { HeaderBackButton } from 'react-navigation-stack';
 import ImageUpload from '../ImageUpload';
 import * as contactService from '../../services/contactService';
 import styles from '../../styles/styles'

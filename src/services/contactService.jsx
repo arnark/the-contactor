@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import * as Contacts from 'expo-contacts';
 const contactsDirectory = `${FileSystem.documentDirectory}contacts`;
 
 
@@ -60,8 +61,8 @@ export const getAllContacts = async () => {
 
 export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
   const contactId = getNewContactId();
-  // Using contactId as file name instead of contactName, in case of duplicate names
-  const fileUri = `${contactsDirectory}/${contactId}.json`
+  const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
+  const fileUri = `${contactsDirectory}/${dashedContactName}.json`
   const contact = JSON.stringify({
     contactId,
     contactName,
@@ -81,5 +82,24 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
     return { status: true };
   } catch (e) {
     return { status: false, message: 'Failed to create contact. Please try again.' };
+  }
+}
+
+export const importContacts = async () => {
+  const { data } = await Contacts.getContactsAsync({
+    fields: [
+      Contacts.PHONE_NUMBERS,
+      Contacts.IMAGE
+    ],
+  });
+
+  for (let i = 0; i < data.length; i += 1) {
+    const contactName = data[i].name;
+    const contactNumber = data[i].digits;
+    let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
+    if (data[i].image !== undefined) {
+      contactImage = data[i].image.uri;
+    }
+    await createNewContact(contactName, contactNumber, contactImage);
   }
 }
