@@ -3,9 +3,9 @@ import { Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
 
 
-const ContactRow = ({ contactId, contactName, contactPhoto, navigation }) => (
+const ContactRow = ({ contactId, contactName, contactPhoneNumber, contactPhoto, navigation }) => (
   <TouchableHighlight
-    onPress={() => { navigation.navigate('Contact', { contactId, contactName, contactPhoto }); }}
+    onPress={() => { navigation.navigate('Contact', { contactId, contactName, contactPhoneNumber, contactPhoto }); }}
     style={styles.rowContainer}
     navigation={navigation}
   >

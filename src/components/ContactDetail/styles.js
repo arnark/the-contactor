@@ -2,20 +2,20 @@ import { StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    //flexWrap: 'wrap',
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fc5203'
-    //justifyContent: 'center',
   },
   image: {
-    marginTop: 50,
-    //alignSelf: 'center',
+    width: 200,
+    height: 200
   },
-  info: {
+  header: {
     fontSize: 15,
     paddingLeft: 10,
     paddingTop: 20,
     paddingBottom: 20
   },
+  info: {
+    fontSize: 30,
+  }
 });

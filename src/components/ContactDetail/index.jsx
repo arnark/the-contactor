@@ -5,13 +5,15 @@ import styles from './styles'
 
 export default class ContactDetail extends React.Component {
   render() {
-    console.log(this.props.navigation.state.params.contactName);
-    const { navigate } = this.props.navigation;
+    console.log(this.props.navigation.state.params.contactPhoneNumber);
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Image source={require('./../../../assets/icon.png')} style={styles.image}/>
-        <Text style={styles.info}>Name: {this.props.navigation.state.params.contactName}</Text>
-        <Text style={styles.info}>Phonenumber: </Text>
+        <Image source={{ uri: navigation.getParam('contactPhoto', 'default value') }} style={styles.image}/>
+        <Text style={styles.header}>Name</Text>
+        <Text style={styles.info}> {navigation.getParam('contactName', 'default value')}</Text>
+        <Text style={styles.header}>Phonenumber </Text>
+        <Text style={styles.info}> {navigation.getParam('contactPhoneNumber', 'default value')} </Text>
       </View>
     );
   }
