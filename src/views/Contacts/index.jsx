@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, TextInput } from 'react-native';
 import ContactList from '../../components/ContactList';
 import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
 import styles from './styles';
+import globalStyles from '../../styles/styles';
 
 
 export default class Contacts extends React.Component {
@@ -23,10 +24,21 @@ export default class Contacts extends React.Component {
     this.setState({ contacts });
   }
 
+  async searchForContacts(str) {
+    const contacts = await contactService.searchForContacts(str);
+    this.setState({ contacts });
+  }
+
   render() {
     return (
       <>
         <View style={styles.container}>
+          <TextInput
+            value={this.state.name}
+            onChangeText={(text) => this.searchForContacts(text)}
+            style={globalStyles.inputField}
+          />
+
           <ContactList
             contacts={this.state.contacts}
             navigation={this.props.navigation}

@@ -59,6 +59,28 @@ export const getAllContacts = async () => {
   }));
 }
 
+export const searchForContacts = async (str) => {
+  const allContacts = await getAllContacts();
+  const foundContacts = [];
+  for (let i = 0; i < allContacts.length; i += 1) {
+    const searchStr = str.toLowerCase();
+    const contactName = allContacts[i].contactName.toLowerCase();
+    if (contactName.includes(searchStr)) {
+      foundContacts.push(allContacts[i]);
+    }
+  }
+
+  sortContactsByName(foundContacts);
+  return Promise.all(foundContacts.map(async (contact) => {
+    return {
+      contactId: contact.contactId,
+      contactName: contact.contactName,
+      contactPhoneNumber: contact.contactPhoneNumber,
+      contactPhoto: contact.contactPhoto
+    };
+  }));
+}
+
 export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
