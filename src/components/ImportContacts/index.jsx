@@ -29,6 +29,7 @@ export default class App extends React.Component {
       await contactService.importContacts();
       this.props.updateState();
       Alert.alert('Contacts were imported successfully.');
+      this.props.navigation.goBack();
     }
   }
 

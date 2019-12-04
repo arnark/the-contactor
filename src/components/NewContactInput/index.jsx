@@ -15,7 +15,6 @@ export default class NewContactInput extends React.Component {
   }
 
   handleImageUri = (imageUri) => {
-    console.log(imageUri);
     this.setState({ imageUri });
   }
 
@@ -32,6 +31,7 @@ export default class NewContactInput extends React.Component {
           } else {
             Alert.alert('Contact created successfully!');
             this.props.navigation.state.params.updateState();
+            this.props.navigation.goBack();
           }
         }}
       >
@@ -41,6 +41,7 @@ export default class NewContactInput extends React.Component {
           <View style={styles.container}>
             <ImportContacts
               updateState={this.props.navigation.state.params.updateState}
+              navigation={this.props.navigation}
             />
             <View style={styles.mainContent}>
               <Text style={styles.inputFieldLabel}>Contact Name</Text>

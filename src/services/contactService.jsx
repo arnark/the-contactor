@@ -84,11 +84,21 @@ export const searchForContacts = async (str) => {
 export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
-  const fileUri = `${contactsDirectory}/${dashedContactName}.json`
+  const fileUri = `${contactsDirectory}/${dashedContactName}.json`;
+  const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
+
+  if (contactName === '') {
+    return { status: false, message: 'Name can not be empty.' };
+  } if (strippedPhoneNumber === '') {
+    return { status: false, message: 'Phone number not be empty.' };
+  } if (isNaN(strippedPhoneNumber)) {
+    return { status: false, message: 'Invalid phone number.' };
+  }
+
   const contact = JSON.stringify({
     contactId,
     contactName,
-    contactPhoneNumber,
+    contactPhoneNumber: strippedPhoneNumber,
     contactPhoto
   });
 
