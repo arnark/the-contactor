@@ -5,8 +5,10 @@ import { Button } from 'react-native';
 
 import Contacts from '../views/Contacts';
 import NewContact from '../views/NewContact';
+import EditContact from '../views/EditContact';
 import Contact from '../views/Contact';
 import ImportContacts from '../components/ImportContacts';
+
 
 export default createAppContainer(createStackNavigator({
   Contacts: {
@@ -28,6 +30,17 @@ export default createAppContainer(createStackNavigator({
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
+  EditContact: {
+    screen: EditContact,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Edit Contact',
+      headerTitleStyle: {
+        fontSize: 22
+      },
+      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contact" tintColor="#000" backTitleVisible />
+    }),
+  },
+
   Contact: {
     screen: Contact,
     navigationOptions: ({ navigation }) => ({

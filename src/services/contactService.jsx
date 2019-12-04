@@ -16,6 +16,7 @@ function sortContactsByName(contactsArray) {
   })
 }
 
+
 async function createContactsDirectory() {
   const dir = await FileSystem.getInfoAsync(contactsDirectory);
   if (!dir.exists) {
