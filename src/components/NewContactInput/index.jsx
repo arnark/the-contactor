@@ -5,6 +5,7 @@ import {
 import { Formik } from 'formik';
 import { HeaderBackButton } from 'react-navigation-stack';
 import ImageUpload from '../ImageUpload';
+import ImportContacts from '../ImportContacts';
 import * as contactService from '../../services/contactService';
 import styles from '../../styles/styles'
 
@@ -38,6 +39,9 @@ export default class NewContactInput extends React.Component {
           handleChange, handleBlur, handleSubmit, values
         }) => (
           <View style={styles.container}>
+            <ImportContacts
+              updateState={this.props.navigation.state.params.updateState}
+            />
             <View style={styles.mainContent}>
               <Text style={styles.inputFieldLabel}>Contact Name</Text>
               <TextInput

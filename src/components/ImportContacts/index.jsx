@@ -1,17 +1,16 @@
 import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Button , Alert } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as contactService from '../../services/contactService';
 
 export default class App extends React.Component {
-  componentDidMount = async () => {
+  importContactsPrompt = async () => {
     Alert.alert(
       'Would you like to import all contacts from your phone?',
       '',
       [
         {
           text: 'Cancel',
-          onPress: () => this.props.navigation.goBack(),
           style: 'cancel',
         },
         {
@@ -28,14 +27,16 @@ export default class App extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CONTACTS);
     if (status === 'granted') {
       await contactService.importContacts();
-      alert('Successs!!!!!');
-      this.props.navigation.goBack()
+      this.props.updateState();
+      Alert.alert('Contacts were imported successfully.');
     }
   }
 
   render() {
     return (
-      <View />
+      <View>
+        <Button title="Import Contacts" onPress={this.importContactsPrompt} />
+      </View>
     );
   }
 }
