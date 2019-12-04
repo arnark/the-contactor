@@ -5,5 +5,8 @@ export default StyleSheet.create({
     flex: 6,
     backgroundColor: '#fff',
     width: 'auto'
+  },
+  item: {
+    backgroundColor: 'black'
   }
 });

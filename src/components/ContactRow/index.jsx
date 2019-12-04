@@ -10,7 +10,7 @@ const ContactRow = ({ contactId, contactName, contactPhoneNumber, contactPhoto, 
     navigation={navigation}
   >
     <>
-      <Text>{contactName}</Text>
+      <Text style={{ color: 'white' }} >{contactName}</Text>
       <Image
         style={{ width: 35, height: 35 }}
         source={{ uri: contactPhoto }}

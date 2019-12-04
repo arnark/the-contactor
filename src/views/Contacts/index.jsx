@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import NewContactButton from '../../components/NewContactButton';
@@ -47,16 +47,12 @@ export default class Contacts extends React.Component {
             onChangeText={(text) => this.updateSearch(text)}
             value={this.state.searchStr}/>
 
-            <TextInput
-              value={this.state.name}
-              onChangeText={(text) => this.searchForContacts(text)}
-              style={globalStyles.inputField}
-            />
-
+            <ScrollView >
             <ContactList
               contacts={this.state.contacts}
               navigation={this.props.navigation}
             />
+            </ScrollView>
           </View>
           <TouchableOpacity
             onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
