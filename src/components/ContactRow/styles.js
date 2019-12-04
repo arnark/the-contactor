@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
   contactRowText: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: "500"
   },
   rowDataContainer: {
     width: 380,
