@@ -35,7 +35,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{ fontSize: 55 }}>
         <Button title="Import Contacts" onPress={this.importContactsPrompt} />
       </View>
     );

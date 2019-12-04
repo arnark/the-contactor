@@ -5,6 +5,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import styles from './styles';
 
 export default class ImagePickerExample extends React.Component {
   state = {
@@ -12,6 +13,7 @@ export default class ImagePickerExample extends React.Component {
   };
 
   componentDidMount() {
+    this.setState({ image: 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png' });
     this.getPermissionAsync();
   }
 
@@ -75,13 +77,13 @@ export default class ImagePickerExample extends React.Component {
   render() {
     const { image } = this.state;
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.imageUploadContainer}>
         <Button
           title="Upload an image"
           onPress={this._pickImage}
         />
         {image &&
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+          <Image source={{ uri: image }} style={styles.image} />}
       </View>
     );
   }

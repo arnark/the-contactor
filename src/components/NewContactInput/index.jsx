@@ -50,14 +50,13 @@ export default class NewContactInput extends React.Component {
                 onBlur={handleBlur('contactName')}
                 value={values.contactName}
               />
-              <Text style={styles.inputFieldLabel}>Contact Phone Number</Text>
+              <Text style={styles.inputFieldLabel}>Phone Number</Text>
               <TextInput
                 style={styles.inputField}
                 onChangeText={handleChange('contactPhoneNumber')}
                 onBlur={handleBlur('contactPhoneNumber')}
                 value={values.contactPhoneNumber}
               />
-              <Text style={styles.inputFieldLabel}>Contact Photo</Text>
               <ImageUpload
                 onImageUpload={this.handleImageUri}
               />
