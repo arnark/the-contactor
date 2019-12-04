@@ -5,7 +5,6 @@ import styles from './styles'
 
 export default class ContactDetail extends React.Component {
   render() {
-    console.log(this.props.navigation.state.params.contactPhoneNumber);
     const { navigation } = this.props;
     return (
       <View style={styles.container}>

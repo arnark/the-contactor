@@ -4,20 +4,25 @@ import ContactRow from '../ContactRow';
 import styles from './styles'
 
 const ContactsList = ({ contacts, navigation }) => (
-  <View style={ styles.container }>
+  <View style={styles.container}>
     <FlatList
-      style = {styles.row}
+      style={styles.row}
       numColumns={1}
       data={contacts}
-      renderItem={({ item: { contactId, contactName, contactPhoto} }) => (
+      renderItem={({
+        item: {
+          contactId, contactName, contactPhoto, contactPhoneNumber
+        }
+      }) => (
         <ContactRow
           contactId={contactId}
           contactName={contactName}
           contactPhoto={contactPhoto}
+          contactPhoneNumber={contactPhoneNumber}
           navigation={navigation}
         />
       )}
-      //keyExtractor={(contact) => contact.contactId.toString()}
+      // keyExtractor={(contact) => contact.contactId.toString()}
     />
   </View>
 );

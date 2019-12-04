@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import NewContactButton from '../../components/NewContactButton';
 import * as contactService from '../../services/contactService';
 import styles from './styles';
-import globalStyles from '../../styles/styles';
 
 
 export default class Contacts extends React.Component {
@@ -20,6 +19,11 @@ export default class Contacts extends React.Component {
     await this.fetchContacts();
   }
 
+  updateSearch = (text) => {
+    this.setState({ searchStr: text });
+    this.searchForContacts(text);
+  }
+
   async fetchContacts() {
     const contacts = await contactService.getAllContacts();
     this.setState({ contacts });
@@ -30,36 +34,28 @@ export default class Contacts extends React.Component {
     this.setState({ contacts });
   }
 
-
-  updateSearch = text => {
-      this.setState({ searchStr : text });
-      this.searchForContacts(text) ;
-    }
-
-
-
-    render() {
-      return (
-        <>
-          <View style={styles.container}>
+  render() {
+    return (
+      <>
+        <View style={styles.container}>
           <SearchBar
             placeholder="Search.."
             onChangeText={(text) => this.updateSearch(text)}
             value={this.state.searchStr}/>
 
-            <ScrollView >
+          <ScrollView>
             <ContactList
               contacts={this.state.contacts}
               navigation={this.props.navigation}
             />
-            </ScrollView>
-          </View>
-          <TouchableOpacity
-            onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
-          >
-            <NewContactButton />
-          </TouchableOpacity>
-        </>
-      );
-    }
+          </ScrollView>
+        </View>
+        <TouchableOpacity
+          onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
+        >
+          <NewContactButton />
+        </TouchableOpacity>
+      </>
+    );
   }
+}

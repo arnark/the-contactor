@@ -117,7 +117,12 @@ export const importContacts = async () => {
 
   for (let i = 0; i < data.length; i += 1) {
     const contactName = data[i].name;
-    const contactNumber = data[i].digits;
+    let contactNumber = '';
+    try {
+      contactNumber = data[i].phoneNumbers[0].digits;
+    } catch (err) {
+      console.log('undefined phone number');
+    }
     let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
     if (data[i].image !== undefined) {
       contactImage = data[i].image.uri;
