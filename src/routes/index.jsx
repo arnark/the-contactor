@@ -12,28 +12,37 @@ export default createAppContainer(createStackNavigator({
   Contacts: {
     screen: Contacts,
     navigationOptions: () => ({
-      title: 'Contacts'
+      title: 'Contacts',
+      headerTitleStyle: {
+        fontSize: 22
+      }
     }),
   },
   NewContact: {
     screen: NewContact,
     navigationOptions: ({ navigation }) => ({
       title: 'New Contact',
-      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#fff" backTitleVisible />
+      headerTitleStyle: {
+        fontSize: 22
+      },
+      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
   Contact: {
     screen: Contact,
     navigationOptions: ({ navigation }) => ({
       title: 'Contact',
-      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#fff" backTitleVisible />
+      headerTitleStyle: {
+        fontSize: 22
+      },
+      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
   ImportContacts: {
     screen: ImportContacts,
     navigationOptions: ({ navigation }) => ({
       title: 'Import Contacts',
-      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="New Contact" tintColor="#fff" backTitleVisible />
+      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="New Contact" tintColor="#000" backTitleVisible />
     }),
   }
 },
@@ -41,9 +50,9 @@ export default createAppContainer(createStackNavigator({
   /* The header config from HomeScreen is now here */
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#2e2c2e'
+      backgroundColor: '#fff'
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
       textAlign: 'center',

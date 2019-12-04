@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, TouchableHighlight, Image, Alert } from 'react-native';
+import {
+  Text, TouchableHighlight, Image, View
+} from 'react-native';
 import styles from './styles';
 
 
@@ -13,13 +15,15 @@ const ContactRow = ({ contactId, contactName, contactPhoneNumber, contactPhoto, 
     style={styles.rowContainer}
     navigation={navigation}
   >
-    <>
-      <Text style={{ color: 'white' }}>{contactName}</Text>
+    <View style={styles.rowDataContainer}>
       <Image
-        style={{ width: 35, height: 35 }}
+        style={styles.imageContainer}
         source={{ uri: contactPhoto }}
       />
-    </>
+      <Text style={styles.contactRowText}>
+        {contactName}
+      </Text>
+    </View>
   </TouchableHighlight>
 );
 

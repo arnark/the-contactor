@@ -41,7 +41,10 @@ export default class Contacts extends React.Component {
           <SearchBar
             placeholder="Search.."
             onChangeText={(text) => this.updateSearch(text)}
-            value={this.state.searchStr}/>
+            value={this.state.searchStr}
+            inputContainerStyle={styles.inputContainerStyle}
+            containerStyle={styles.containerStyle}
+          />
 
           <ScrollView>
             <ContactList

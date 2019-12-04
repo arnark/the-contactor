@@ -7,6 +7,14 @@ export default StyleSheet.create({
     width: 'auto'
   },
   item: {
-    backgroundColor: 'black'
+    backgroundColor: '#000'
+  },
+  containerStyle: {
+    backgroundColor: '#fff',
+    borderBottomColor: '#E8E8E8',
+    borderTopColor: '#fff'
+  },
+  inputContainerStyle: {
+    backgroundColor: '#E8E8E8'
   }
 });

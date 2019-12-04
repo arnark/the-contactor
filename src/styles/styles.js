@@ -26,16 +26,13 @@ export default StyleSheet.create({
   },
   submitButton: {
     height: 60,
-    flexDirection: 'row',
-    backgroundColor: '#2e2c2e',
+    backgroundColor: '#000',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 'auto',
-    marginTop: 'auto'
+    alignItems: 'center'
   },
   submitActionText: {
     fontWeight: 'bold',
     color: 'white',
-    fontSize: 16
+    fontSize: 18
   }
 });
