@@ -26,7 +26,7 @@ export default class NewContactInput extends React.Component {
         initialValues={{ contactName: this.props.navigation.state.params.contactName, contactPhoneNumber:  this.props.navigation.state.params.contactPhoneNumber, contactPhoto: '' }}
         onSubmit={async (values) => {
           const status = await contactService.EditContact(
-            this.props.navigation.state.params.contactId, values.contactName, values.contactPhoneNumber, this.state.imageUri
+            this.props.navigation.state.params.contactName, values.contactName, values.contactPhoneNumber, this.state.imageUri
           );
           if (status.status === false) {
             Alert.alert(status.message);
