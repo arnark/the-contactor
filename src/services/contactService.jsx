@@ -84,7 +84,6 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
   const fileUri = `${contactsDirectory}/${dashedContactName}.json`;
-  if (typeof contactPhoneNumber === 'undefined') { return { status: false, message: 'Invalid phone number.' }; }
   const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
 
   if (contactName === '') {
@@ -132,7 +131,9 @@ export const importContacts = async () => {
       contactNumber = data[i].phoneNumbers[0].digits;
     } catch (err) {
       console.log('undefined phone number');
+      continue;
     }
+    if (typeof contactNumber === 'undefined') { continue; }
     let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
     if (data[i].image !== undefined) {
       contactImage = data[i].image.uri;
