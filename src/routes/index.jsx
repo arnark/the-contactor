@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { HeaderBackButton, createStackNavigator } from 'react-navigation-stack';
-import { Button } from 'react-native';
+import { Button, View } from 'react-native';
 
 import Contacts from '../views/Contacts';
 import NewContact from '../views/NewContact';
@@ -15,18 +15,12 @@ export default createAppContainer(createStackNavigator({
     screen: Contacts,
     navigationOptions: () => ({
       title: 'Contacts',
-      headerTitleStyle: {
-        fontSize: 22
-      }
     }),
   },
   NewContact: {
     screen: NewContact,
     navigationOptions: ({ navigation }) => ({
       title: 'New Contact',
-      headerTitleStyle: {
-        fontSize: 22
-      },
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
@@ -34,9 +28,6 @@ export default createAppContainer(createStackNavigator({
     screen: EditContact,
     navigationOptions: ({ navigation }) => ({
       title: 'Edit Contact',
-      headerTitleStyle: {
-        fontSize: 22
-      },
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
@@ -45,9 +36,6 @@ export default createAppContainer(createStackNavigator({
     screen: Contact,
     navigationOptions: ({ navigation }) => ({
       title: 'Contact',
-      headerTitleStyle: {
-        fontSize: 22
-      },
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
@@ -60,17 +48,21 @@ export default createAppContainer(createStackNavigator({
   }
 },
 {
-  /* The header config from HomeScreen is now here */
+   /*The header config from HomeScreen is now here*/
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#fff'
+      backgroundColor: '#fff',
     },
     headerTintColor: '#000',
     headerTitleStyle: {
+      flex: 1,
+      fontSize: 22,
       fontWeight: 'bold',
       textAlign: 'center',
-      flex: 1,
+      justifyContent: "center",
+      alignSelf: "center",
     },
     initialRouteName: 'Contacts',
   },
-}));
+}
+));

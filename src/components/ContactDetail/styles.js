@@ -17,5 +17,10 @@ export default StyleSheet.create({
   },
   info: {
     fontSize: 30,
+  },
+  phoneIcon:{
+    marginTop: 50,
+    height: 100,
+    width: 100
   }
 });
