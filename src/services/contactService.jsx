@@ -143,6 +143,15 @@ export const importContacts = async () => {
       console.log(e);
       continue;
     }
+
+    if (contactName === undefined) {
+      contactName = 'some stupid error m8';
+    }
+
+    if (contactNumber === undefined) {
+      contactNumber = '666';
+    }
+
     createNewContact(contactName, contactNumber, contactImage);
   }
 }

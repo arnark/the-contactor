@@ -2,8 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import ContactDetail from '../../components/ContactDetail';
 import EditButton from '../../components/EditContactButton'
-import contacts from '../../components/ContactList'
-
+import * as contactService from '../../services/contactService';
 
 export default class Contacts extends React.Component {
   constructor(props) {
