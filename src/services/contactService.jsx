@@ -130,28 +130,32 @@ export const importContacts = async () => {
 
   for (let i = 0; i < data.length; i += 1) {
     let contactName = '';
-    let contactNumber = '';
+    let contactNumber = '000';
     let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
 
     try {
+      // Import phone numbers
+      data[i].phoneNumbers.forEach((num) => {
+        if (num.number !== undefined || num.number !== '') {
+          contactNumber = num.number;
+        }
+      });
+
+      // Import name
       contactName = data[i].name;
-      contactNumber = data[i].phoneNumbers[0].digits;
+
+      // Import image if it exists
       if (data[i].image !== undefined) {
         contactImage = data[i].image.uri;
       }
     } catch (e) {
+      // continue if there is some problem with imported data
       console.log(e);
       continue;
     }
 
-    if (contactName === undefined) {
-      contactName = 'some stupid error m8';
-    }
-
-    if (contactNumber === undefined) {
-      contactNumber = '666';
-    }
-
+    if (contactName === undefined) { contactName = 'invalid name'; }
+    if (contactNumber === undefined) { contactNumber = '777'; }
     createNewContact(contactName, contactNumber, contactImage);
   }
 }
