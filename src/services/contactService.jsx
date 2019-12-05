@@ -16,7 +16,6 @@ function sortContactsByName(contactsArray) {
   })
 }
 
-
 async function createContactsDirectory() {
   const dir = await FileSystem.getInfoAsync(contactsDirectory);
   if (!dir.exists) {
@@ -86,6 +85,7 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
   const fileUri = `${contactsDirectory}/${dashedContactName}.json`;
+  if (typeof contactPhoneNumber === 'undefined') { return { status: false, message: 'Invalid phone number.' }; }
   const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
 
   if (contactName === '') {

@@ -11,7 +11,7 @@ export default class Contacts extends React.Component {
     this.state = {
       contacts: []
     };
-  };
+  }
 
   async componentDidMount() {
     await this.fetchContacts();
