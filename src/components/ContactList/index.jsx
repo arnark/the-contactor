@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import ContactRow from '../ContactRow';
 import styles from './styles'
 
-const ContactsList = ({ contacts, navigation }) => (
+const ContactsList = ({ contacts, navigation, updateState }) => (
   <View style={styles.container}>
     <FlatList
       style={styles.row}
@@ -20,6 +20,7 @@ const ContactsList = ({ contacts, navigation }) => (
           contactPhoto={contactPhoto}
           contactPhoneNumber={contactPhoneNumber}
           navigation={navigation}
+          updateState={updateState}
         />
       )}
       keyExtractor={(contact) => contact.contactId}

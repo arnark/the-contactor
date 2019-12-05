@@ -65,7 +65,7 @@ export default class NewContactInput extends React.Component {
                 onPress={handleSubmit}
               >
                 <View style={styles.submitButton}>
-                  <Text style={styles.submitActionText}>Create Contact</Text>
+                  <Text style={styles.submitActionText}>Update Contact</Text>
                 </View>
               </TouchableHighlight>
             </KeyboardAvoidingView>

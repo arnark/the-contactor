@@ -4,7 +4,7 @@ import ContactDetail from '../../components/ContactDetail';
 import EditButton from '../../components/EditContactButton'
 import * as contactService from '../../services/contactService';
 
-export default class Contacts extends React.Component {
+export default class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,8 +21,10 @@ export default class Contacts extends React.Component {
     this.setState({ contacts });
   }
 
+
   render() {
     console.log(this.props.navigation.state.params)
+    this.props.navigation.state.params.updateState();
     const { navigate } = this.props.navigation;
     return (
       <>
@@ -30,12 +32,11 @@ export default class Contacts extends React.Component {
           navigation={this.props.navigation}
         />
         <TouchableOpacity
-          //onPress={() => { this.props.navigation.navigate('Contacts'); }}
-          onPress={() => { this.props.navigation.navigate('EditContact', { contactName: this.props.navigation.state.params.contactName,
+          onPress={() => { this.props.navigation.navigate('EditContact', { updateState: this.fetchContacts.bind(this) , contactName: this.props.navigation.state.params.contactName,
           contactPhoneNumber: this.props.navigation.state.params.contactPhoneNumber, contactId: this.props.navigation.state.params.contactId }); }}
-          //onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
-          >
-        <EditButton />
+
+        >
+          <EditButton />
         </TouchableOpacity>
       </>
     );

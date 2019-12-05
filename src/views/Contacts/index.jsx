@@ -24,7 +24,12 @@ export default class Contacts extends React.Component {
     this.searchForContacts(text);
   }
 
+  handleComponentUpdateState = () => {
+    this.fetchContacts.bind(this);
+  }
+
   async fetchContacts() {
+    console.log('dasf');
     const contacts = await contactService.getAllContacts();
     this.setState({ contacts });
   }
@@ -50,6 +55,7 @@ export default class Contacts extends React.Component {
             <ContactList
               contacts={this.state.contacts}
               navigation={this.props.navigation}
+              updateState={this.fetchContacts.bind(this)}
             />
           </ScrollView>
         </View>

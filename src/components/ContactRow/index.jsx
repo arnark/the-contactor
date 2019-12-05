@@ -5,11 +5,11 @@ import {
 import styles from './styles';
 
 
-const ContactRow = ({ contactId, contactName, contactPhoneNumber, contactPhoto, navigation }) => (
+const ContactRow = ({ contactId, contactName, contactPhoneNumber, contactPhoto, navigation, updateState }) => (
   <TouchableHighlight
     onPress={() => {
       navigation.navigate('Contact', {
-        contactId, contactName, contactPhoneNumber, contactPhoto
+        contactId, contactName, contactPhoneNumber, contactPhoto, updateState
       });
     }}
     style={styles.rowContainer}
