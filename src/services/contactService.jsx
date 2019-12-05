@@ -83,21 +83,20 @@ export const searchForContacts = async (str) => {
 export const createNewContact = async (contactName, contactPhoneNumber, contactPhoto) => {
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
-  const fileUri = `${contactsDirectory}/${dashedContactName}.json`;
-  let strippedPhoneNumber = '000';
-  try {
-    strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
-  } catch (e) {
-    console.log(e);
-  }
+  let filename = dashedContactName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  filename = filename.replace(/Þ|þ/g, 't');
+  filename = filename.replace(/Ð|ð/g, 'th');
+  filename = filename.replace(/æ|Æ/g, 'ae');
+  const fileUri = `${contactsDirectory}/${filename}.json`;
+  const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
 
   if (contactName === '') {
     return { status: false, message: 'Name can not be empty.' };
   } if (strippedPhoneNumber === '') {
     return { status: false, message: 'Phone number not be empty.' };
-  } // if (isNaN(strippedPhoneNumber)) {
-    // return { status: false, message: 'Invalid phone number.' };
-  // }
+  } if (isNaN(strippedPhoneNumber)) {
+    return { status: false, message: 'Invalid phone number.' };
+  }
 
   const contact = JSON.stringify({
     contactId,
@@ -130,18 +129,20 @@ export const importContacts = async () => {
   });
 
   for (let i = 0; i < data.length; i += 1) {
-    const contactName = data[i].name;
+    let contactName = '';
     let contactNumber = '';
-    try {
-      contactNumber = data[i].phoneNumbers[0].digits;
-    } catch (err) {
-      console.log('undefined phone number');
-    }
-
     let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
-    if (data[i].image !== undefined) {
-      contactImage = data[i].image.uri;
+
+    try {
+      contactName = data[i].name;
+      contactNumber = data[i].phoneNumbers[0].digits;
+      if (data[i].image !== undefined) {
+        contactImage = data[i].image.uri;
+      }
+    } catch (e) {
+      console.log(e);
+      continue;
     }
-    await createNewContact(contactName, contactNumber, contactImage);
+    createNewContact(contactName, contactNumber, contactImage);
   }
 }
