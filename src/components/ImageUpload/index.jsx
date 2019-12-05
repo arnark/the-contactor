@@ -13,7 +13,13 @@ export default class ImagePickerExample extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ image: 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png' });
+    console.log(this.props.contactPhoto)
+    if (this.props.imageUri !== undefined) {
+      console.log(this.props.contactPhoto)
+      this.setState({ image: this.props.imageUri });
+    } else {
+      this.setState({ image: 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png' });
+    }
     this.getPermissionAsync();
   }
 

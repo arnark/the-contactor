@@ -32,8 +32,14 @@ export default class Contact extends React.Component {
           navigation={this.props.navigation}
         />
         <TouchableOpacity
-          onPress={() => { this.props.navigation.navigate('EditContact', { updateState: this.fetchContacts.bind(this) , contactName: this.props.navigation.state.params.contactName,
-          contactPhoneNumber: this.props.navigation.state.params.contactPhoneNumber, contactId: this.props.navigation.state.params.contactId }); }}
+          onPress={() => {
+            this.props.navigation.navigate('EditContact', { updateState: this.fetchContacts.bind(this),
+              contactName: this.props.navigation.state.params.contactName,
+              contactPhoneNumber: this.props.navigation.state.params.contactPhoneNumber,
+              contactId: this.props.navigation.state.params.contactId,
+              contactPhoto: this.props.navigation.state.params.contactPhoto
+            });
+          }}
 
         >
           <EditButton />

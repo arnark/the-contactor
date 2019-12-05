@@ -12,7 +12,7 @@ import styles from '../../styles/styles'
 
 export default class NewContactInput extends React.Component {
   componentDidMount() {
-    this.setState({ imageUri: 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png' });
+    this.setState({ imageUri: this.props.navigation.state.params.contactPhoto });
   }
 
   handleImageUri = (imageUri) => {
@@ -20,13 +20,19 @@ export default class NewContactInput extends React.Component {
   }
 
   render() {
-
     return (
       <Formik
-        initialValues={{ contactName: this.props.navigation.state.params.contactName, contactPhoneNumber:  this.props.navigation.state.params.contactPhoneNumber, contactPhoto: '' }}
+        initialValues={{
+          contactName: this.props.navigation.state.params.contactName,
+          contactPhoneNumber:  this.props.navigation.state.params.contactPhoneNumber,
+          contactPhoto: ''
+        }}
         onSubmit={async (values) => {
           const status = await contactService.EditContact(
-            this.props.navigation.state.params.contactName, values.contactName, values.contactPhoneNumber, this.state.imageUri
+            this.props.navigation.state.params.contactName,
+            values.contactName,
+            values.contactPhoneNumber,
+            this.state.imageUri
           );
           if (status.status === false) {
             Alert.alert(status.message);
@@ -58,6 +64,7 @@ export default class NewContactInput extends React.Component {
               />
               <ImageUpload
                 onImageUpload={this.handleImageUri}
+                imageUri={this.props.navigation.state.params.contactPhoto}
               />
             </View>
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
