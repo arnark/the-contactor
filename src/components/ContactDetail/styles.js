@@ -6,6 +6,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   image: {
+    marginTop: 20,
     width: 200,
     height: 200
   },
