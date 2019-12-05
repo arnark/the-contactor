@@ -28,7 +28,14 @@ export default createAppContainer(createStackNavigator({
     screen: EditContact,
     navigationOptions: ({ navigation }) => ({
       title: 'Edit Contact',
+<<<<<<< Updated upstream
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
+=======
+      headerTitleStyle: {
+        fontSize: 22
+      },
+      headerLeft: <HeaderBackButton onPress={() => { navigation("Contacts"); }} title="Contacts" tintColor="#000" backTitleVisible />
+>>>>>>> Stashed changes
     }),
   },
 
