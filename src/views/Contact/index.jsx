@@ -23,6 +23,7 @@ export default class Contacts extends React.Component {
 
   render() {
     console.log(this.props.navigation.state.params)
+    this.props.navigation.state.params.updateState();
     const { navigate } = this.props.navigation;
     return (
       <>
@@ -34,8 +35,8 @@ export default class Contacts extends React.Component {
           onPress={() => { this.props.navigation.navigate('EditContact', { contactName: this.props.navigation.state.params.contactName,
           contactPhoneNumber: this.props.navigation.state.params.contactPhoneNumber, contactId: this.props.navigation.state.params.contactId }); }}
           //onPress={() => { this.props.navigation.navigate('NewContact', { updateState: this.fetchContacts.bind(this) }); }}
-          >
-        <EditButton />
+        >
+          <EditButton />
         </TouchableOpacity>
       </>
     );
