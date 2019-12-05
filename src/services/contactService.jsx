@@ -84,15 +84,20 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   const contactId = getNewContactId();
   const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
   const fileUri = `${contactsDirectory}/${dashedContactName}.json`;
-  const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
+  let strippedPhoneNumber = '000';
+  try {
+    strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
+  } catch (e) {
+    console.log(e);
+  }
 
   if (contactName === '') {
     return { status: false, message: 'Name can not be empty.' };
   } if (strippedPhoneNumber === '') {
     return { status: false, message: 'Phone number not be empty.' };
-  } if (isNaN(strippedPhoneNumber)) {
-    return { status: false, message: 'Invalid phone number.' };
-  }
+  } // if (isNaN(strippedPhoneNumber)) {
+    // return { status: false, message: 'Invalid phone number.' };
+  // }
 
   const contact = JSON.stringify({
     contactId,
@@ -131,9 +136,8 @@ export const importContacts = async () => {
       contactNumber = data[i].phoneNumbers[0].digits;
     } catch (err) {
       console.log('undefined phone number');
-      continue;
     }
-    if (typeof contactNumber === 'undefined') { continue; }
+
     let contactImage = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
     if (data[i].image !== undefined) {
       contactImage = data[i].image.uri;

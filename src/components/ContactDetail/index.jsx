@@ -13,7 +13,7 @@ export default class ContactDetail extends React.Component {
     console.log(phoneNumber);
     return (
       <View style={styles.container}>
-        <Image source={{ uri: navigation.getParam('contactPhoto', 'default value') }} style={styles.image}/>
+        <Image source={{ uri: navigation.getParam('contactPhoto', 'default value') }} style={styles.image} />
         <Text style={styles.header}>Name</Text>
         <Text style={styles.info}> {navigation.getParam('contactName', 'default value')}</Text>
         <Text style={styles.header}>Phonenumber </Text>
