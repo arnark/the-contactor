@@ -120,6 +120,54 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   }
 }
 
+export const EditContact = async (oldId, contactName, contactPhoneNumber, contactPhoto) => {
+  deleteContact(oldId)
+  const contactId = getNewContactId();
+  const dashedContactName = contactName.replace(/\s+/g, '-').toLowerCase();
+  let filename = dashedContactName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  filename = filename.replace(/Þ|þ/g, 't');
+  filename = filename.replace(/Ð|ð/g, 'th');
+  filename = filename.replace(/æ|Æ/g, 'ae');
+  const fileUri = `${contactsDirectory}/${filename}.json`;
+  const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
+
+
+  if (contactName === '') {
+    return { status: false, message: 'Name can not be empty.' };
+  } if (strippedPhoneNumber === '') {
+    return { status: false, message: 'Phone number not be empty.' };
+  } if (isNaN(strippedPhoneNumber)) {
+    return { status: false, message: 'Invalid phone number.' };
+  }
+
+  const contact = JSON.stringify({
+    contactId,
+    contactName,
+    contactPhoneNumber: strippedPhoneNumber,
+    contactPhoto
+  });
+
+  try {
+
+    // Create the new contact
+    await FileSystem.writeAsStringAsync(fileUri, contact, {
+      encoding: FileSystem.EncodingType.UTF8
+    });
+
+    return { status: true };
+  } catch (e) {
+    return { status: false, message: 'Failed to update contact. Please try again.' };
+  }
+}
+
+export function deleteContact(contactId) {
+  for (let i = 0; i < getAllContacts.length ; i +=1) {
+    if (getAllContacts[i].contactId === contactId) {
+      getAllContacts.splice(i, 1);
+    }
+  }
+};
+
 export const importContacts = async () => {
   const { data } = await Contacts.getContactsAsync({
     fields: [

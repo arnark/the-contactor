@@ -29,8 +29,8 @@ export default createAppContainer(createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Edit Contact',
       headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
-    }),
-  },
+  }),
+},
 
   Contact: {
     screen: Contact,

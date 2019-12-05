@@ -20,20 +20,20 @@ export default class NewContactInput extends React.Component {
   }
 
   render() {
-    console.log(this.props.navigation)
+
     return (
       <Formik
         initialValues={{ contactName: this.props.navigation.state.params.contactName, contactPhoneNumber:  this.props.navigation.state.params.contactPhoneNumber, contactPhoto: '' }}
         onSubmit={async (values) => {
-          const status = await contactService.createNewContact(
-            values.contactName, values.contactPhoneNumber, this.state.imageUri
+          const status = await contactService.EditContact(
+            this.props.navigation.state.params.contactId, values.contactName, values.contactPhoneNumber, this.state.imageUri
           );
           if (status.status === false) {
             Alert.alert(status.message);
           } else {
             Alert.alert('Contact created successfully!');
             this.props.navigation.state.params.updateState();
-            this.props.navigation.goBack();
+            this.props.navigation.navigate('Contacts');
           }
         }}
       >
