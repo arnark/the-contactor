@@ -37,7 +37,7 @@ export default createAppContainer(createStackNavigator({
       headerTitleStyle: {
         fontSize: 22
       },
-      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contact" tintColor="#000" backTitleVisible />
+      headerLeft: <HeaderBackButton onPress={() => { navigation.goBack(); }} title="Contacts" tintColor="#000" backTitleVisible />
     }),
   },
 
