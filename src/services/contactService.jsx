@@ -86,7 +86,7 @@ export const createNewContact = async (contactName, contactPhoneNumber, contactP
   let filename = dashedContactName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   filename = filename.replace(/Þ|þ/g, 't');
   filename = filename.replace(/Ð|ð/g, 'th');
-  console.log(filename);
+  filename = filename.replace(/æ|Æ/g, 'ae');
   const fileUri = `${contactsDirectory}/${filename}.json`;
   const strippedPhoneNumber = contactPhoneNumber.replace(/[- )(]/g, '');
 
