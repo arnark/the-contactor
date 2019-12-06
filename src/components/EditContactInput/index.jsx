@@ -13,10 +13,15 @@ import styles from '../../styles/styles'
 export default class NewContactInput extends React.Component {
   componentDidMount() {
     this.setState({ imageUri: this.props.navigation.state.params.contactPhoto });
+    this._isMounted = true;
   }
 
   handleImageUri = (imageUri) => {
     this.setState({ imageUri });
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   render() {
