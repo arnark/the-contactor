@@ -23,7 +23,6 @@ export default class Contact extends React.Component {
 
 
   render() {
-    console.log(this.props.navigation.state.params)
     this.props.navigation.state.params.updateState();
     const { navigate } = this.props.navigation;
     return (

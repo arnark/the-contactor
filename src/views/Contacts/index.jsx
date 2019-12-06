@@ -29,7 +29,6 @@ export default class Contacts extends React.Component {
   }
 
   async fetchContacts() {
-    console.log('dasf');
     const contacts = await contactService.getAllContacts();
     this.setState({ contacts });
   }

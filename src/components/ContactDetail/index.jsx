@@ -11,7 +11,6 @@ export default class ContactDetail extends React.Component {
   render() {
     const { navigation } = this.props;
     const phoneNumber = navigation.getParam('contactPhoneNumber', 'default value');
-    console.log(phoneNumber);
     return (
       <View style={styles.container}>
         <Image source={{ uri: navigation.getParam('contactPhoto', 'default value') }} style={styles.image} />
